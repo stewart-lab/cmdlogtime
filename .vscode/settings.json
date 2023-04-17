@@ -1,0 +1,9 @@
+{
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "110"
+    ],
+    "flake8.args": [
+        "--max-line-length=120"
+    ]
+}
