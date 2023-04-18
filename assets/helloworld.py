@@ -9,7 +9,6 @@ COMMAND_LINE_DEF_FILE = "helloworld_commandline.txt"
 
 
 def main(out_dir, name, logfile=None):
-    #  Then you put all of your code here.....
     with open(Path(out_dir) / "hello.txt", "w") as f:
         f.write("Hello, " + name + "!")
 
