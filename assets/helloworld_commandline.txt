@@ -11,7 +11,7 @@
 #  out_dir must be given.
 # 
 # Example below. First line describes the program
-Compute AUCROC and other stats from infile. Print AUCROC and PR curves.
+Hello_World to demo cmdlogtime
 out_dir|Top level directory that holds all the results|1|1|1|0|0|||
-infile|file path of file with a file with header in format call(1 or 0)\tX\tValue|0|0|0|1|1|||
--print_x_thresh|print every X threshold|0|0|0|0|0|--print_every_x_threshold|1|int
+-n|name|0|0|0|0|0|--name|Bob|str
+-out_dir_suf|Suffix Added after time|0|0|0|0|0|--out_dir_suffix|AAAAZZZZ|str
