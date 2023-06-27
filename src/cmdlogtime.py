@@ -16,6 +16,18 @@ def begin(command_line_def_file, write_msgs_to_stdout=1):
     parms_logfile = open_log_file(my_args["parms_logfile"])
     script_logfile = open_log_file(my_args["script_logfile"])
     pkgs_logfile = open_log_file(my_args["pkgs_logfile"])
+    parms_logfile.write("--------------  START COMMAND LINE USED  -------------\n")
+    parms_logfile.write("python ")
+    for arg in sys.argv:
+        if "=" in arg:
+            left_part, right_part = arg.split("=")
+            right_part = '"' + right_part + '"'
+            parms_logfile.write(" " + left_part + "=" + right_part)
+        else:
+            parms_logfile.write(" " + arg)
+    
+    parms_logfile.write("\n")
+    parms_logfile.write("--------------  END COMMAND LINE USED  -------------\n\n")
     write_args(my_args, parms_logfile)
     write_pkgs(pkgs_logfile)
     write_files(sys.argv[0], command_line_def_file, script_logfile)
