@@ -129,13 +129,20 @@ def get_args_from_line(line, sep="|"):
         and args["is_dir"] in bools
         and args["check_dir"] in bools
         and args["is_file"] in bools
-        and args["check_file"] in bools
+        #and args["check_file"] in bools
     ):
         print(
-            "One of your boolean values for is_out_dir, is_dir, check_dir, is_file, or check_file is not 0 or 1."
+            "One of your boolean values for is_out_dir, is_dir, check_dir, or is_file is not 0 or 1."
             f" See: \n{line}"
         )
         sys.exit(1)
+    if not(args['check_file'] in bools or args['check_file'].startswith("c-") or args['check_file'].startswith("C-")):
+        print(
+            "check_file is not 0 or 1 or c-*, or C-*."
+            f" See: \n{line}"
+        )
+        sys.exit(1)
+    
     if args["alt_name"]:
         if not args["alt_name"].startswith("--"):
             print("Alternate name must start with '--'. See: \n", line)
@@ -222,6 +229,20 @@ def massage_and_validate_args(args, start_time_secs, pretty_start_time, command_
                         "ZZZ"
                     ):  # I think this is the correct logic... RMS.  magic number. Ugh.
                         file_paths_to_check.append(new_args[tmp_name])
+                upper_the_category = False
+                if arg_defs["check_file"].startswith("C-"): 
+                    upper_the_category = True
+                if arg_defs["check_file"].startswith("C-") or arg_defs["check_file"].startswith("c-"):    
+                    #print("here is where id check: ", arg_defs["check_file"], " name: ", new_args[tmp_name])
+                    categories = arg_defs["check_file"][2:].strip().split(",")
+                    if upper_the_category:
+                        mod_cat = new_args[tmp_name].upper()
+                    else:
+                        mod_cat = new_args[tmp_name]
+                    print(categories,  " mod:", mod_cat)
+                    if not mod_cat in categories:
+                        print(tmp_name, ":", mod_cat, " not in ", categories)
+                        sys.exit(1)
     for fpath in file_paths_to_check:
         assert os.path.isfile(fpath), fpath + " file does NOT exist!"
     new_args["start_time_secs"] = start_time_secs
