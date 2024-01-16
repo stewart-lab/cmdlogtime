@@ -233,7 +233,7 @@ def massage_and_validate_args(args, start_time_secs, pretty_start_time, command_
                 if arg_defs["check_file"].startswith("C-"): 
                     upper_the_category = True
                 if arg_defs["check_file"].startswith("C-") or arg_defs["check_file"].startswith("c-"):    
-                    print("here is where id check: ", arg_defs["check_file"], " name: ", new_args[tmp_name])
+                    #print("here is where id check: ", arg_defs["check_file"], " name: ", new_args[tmp_name])
                     categories = arg_defs["check_file"][2:].strip().split(",")
                     if upper_the_category:
                         mod_cat = new_args[tmp_name].upper()
